@@ -1,6 +1,6 @@
 package com.github.hypfvieh.util.fx.fonts;
 
-public enum FontAwesome implements IWebFontCode{
+public enum FontAwesome implements IWebFontCode {
 
 	GLASS                                                ('\uf000'),
 	MUSIC                                                ('\uf001'),
