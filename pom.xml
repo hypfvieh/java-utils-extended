@@ -58,13 +58,13 @@
 		<dependency>
 			<groupId>com.github.hypfvieh</groupId>
 			<artifactId>java-utils</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
+			<version>1.0.2</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.github.hypfvieh</groupId>
 			<artifactId>java-utils</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
+			<version>1.0.2</version>
 			<scope>test</scope>
 			<type>test-jar</type>
 		</dependency>
