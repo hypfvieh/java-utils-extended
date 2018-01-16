@@ -223,6 +223,10 @@ public class XmlConfiguration {
     private List<String> getList(String _key) {
         Node findNode = findNode(_key.split(keyDelimiter));
 
+        if (findNode == null) {
+            return new ArrayList<>();
+        }
+
         String[] keys = null;
         if (!findNode.hasChildNodes() || findNode.getChildNodes().getLength() <= 1) {
             findNode = findNode.getParentNode();
