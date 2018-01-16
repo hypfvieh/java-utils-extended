@@ -1,5 +1,10 @@
 package com.github.hypfvieh.config.xml;
 
+/**
+ * Exception which indicates problems with a given configuration file.
+ * @author hypfvieh
+ * @since v1.0.3 - 2018-01-15
+ */
 public class ConfigurationException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 

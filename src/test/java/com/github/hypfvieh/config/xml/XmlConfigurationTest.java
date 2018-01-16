@@ -16,7 +16,7 @@ public class XmlConfigurationTest extends AbstractBaseUtilTest {
 
     @Test
     public void testGetString() throws IOException {
-        XmlConfiguration xmlConfiguration = new XmlConfigBuilder().setInputFile("src/test/resources/XmlConfigurationUtilTest/xmlConfigTest.xml").build();
+        XmlConfiguration xmlConfiguration = new XmlConfigBuilder().setInputFile("src/test/resources/xmlConfigTest/xmlConfigTest.xml").build();
 
         String readValue = xmlConfiguration.getString("Config/Key2/SubKey1");
         assertEquals("SubValue1", readValue);
@@ -29,7 +29,7 @@ public class XmlConfigurationTest extends AbstractBaseUtilTest {
     @Test
     public void testGetList() throws IOException {
 
-        XmlConfiguration xmlConfiguration = new XmlConfigBuilder().setInputFile("src/test/resources/XmlConfigurationUtilTest/xmlConfigTest.xml").build();
+        XmlConfiguration xmlConfiguration = new XmlConfigBuilder().setInputFile("src/test/resources/xmlConfigTest/xmlConfigTest.xml").build();
 
         List<String> readValue = xmlConfiguration.getStringList("Config/Key2/SubKey1");
         assertEquals(1, readValue.size());
@@ -51,7 +51,7 @@ public class XmlConfigurationTest extends AbstractBaseUtilTest {
 
     @Test
     public void testSetString() throws IOException {
-        XmlConfiguration xmlConfiguration = new XmlConfigBuilder().setInputFile("src/test/resources/XmlConfigurationUtilTest/xmlConfigTest.xml").build();
+        XmlConfiguration xmlConfiguration = new XmlConfigBuilder().setInputFile("src/test/resources/xmlConfigTest/xmlConfigTest.xml").build();
 
         String readValue = xmlConfiguration.getString("Config/Key2/SubKey1");
         assertEquals("SubValue1", readValue);
@@ -64,7 +64,7 @@ public class XmlConfigurationTest extends AbstractBaseUtilTest {
 
     @Test
     public void testSetValues() throws IOException {
-        XmlConfiguration xmlConfiguration = new XmlConfigBuilder().setInputFile("src/test/resources/XmlConfigurationUtilTest/xmlConfigTest.xml").build();
+        XmlConfiguration xmlConfiguration = new XmlConfigBuilder().setInputFile("src/test/resources/xmlConfigTest/xmlConfigTest.xml").build();
 
         String readValue = xmlConfiguration.getString("Config/Key2/SubKey1");
         assertEquals("SubValue1", readValue);
@@ -93,7 +93,7 @@ public class XmlConfigurationTest extends AbstractBaseUtilTest {
     public void testSaveToFile() throws IOException {
         File tempFile = File.createTempFile(getClass().getSimpleName() + getMethodName(), ".xml");
         XmlConfiguration xmlConfiguration = new XmlConfigBuilder()
-            .setInputFile("src/test/resources/XmlConfigurationUtilTest/xmlConfigTest.xml")
+            .setInputFile("src/test/resources/xmlConfigTest/xmlConfigTest.xml")
             .setOutputFile(tempFile).build();
 
         String readValue = xmlConfiguration.getString("Config/Key2/SubKey1");
@@ -118,7 +118,7 @@ public class XmlConfigurationTest extends AbstractBaseUtilTest {
     @Test
     public void testGetStringProperty() {
         XmlConfiguration xmlConfiguration = new XmlConfigBuilder()
-                .setInputFile("src/test/resources/XmlConfigurationUtilTest/xmlConfigTest.xml")
+                .setInputFile("src/test/resources/xmlConfigTest/xmlConfigTest.xml")
                 .setSkipRoot(true)
                 .setKeyDelimiter(".")
                 .setAllowKeyOverrideFromEnvironment(true)
@@ -144,7 +144,7 @@ public class XmlConfigurationTest extends AbstractBaseUtilTest {
     @Test
     public void testGetStringListProperty() {
         XmlConfiguration xmlConfiguration = new XmlConfigBuilder()
-                .setInputFile("src/test/resources/XmlConfigurationUtilTest/xmlConfigTest.xml")
+                .setInputFile("src/test/resources/xmlConfigTest/xmlConfigTest.xml")
                 .setSkipRoot(true)
                 .setKeyDelimiter(".")
                 .build();
@@ -159,7 +159,7 @@ public class XmlConfigurationTest extends AbstractBaseUtilTest {
     @Test
     public void testGetStringSetProperty() {
         XmlConfiguration xmlConfiguration = new XmlConfigBuilder()
-                .setInputFile("src/test/resources/XmlConfigurationUtilTest/xmlConfigTest.xml")
+                .setInputFile("src/test/resources/xmlConfigTest/xmlConfigTest.xml")
                 .setKeyDelimiter(".")
                 .setSkipRoot(true)
                 .build();
@@ -173,7 +173,7 @@ public class XmlConfigurationTest extends AbstractBaseUtilTest {
     @Test
     public void testGetIntProperty() {
         XmlConfiguration xmlConfiguration = new XmlConfigBuilder()
-                .setInputFile("src/test/resources/XmlConfigurationUtilTest/xmlConfigTest.xml")
+                .setInputFile("src/test/resources/xmlConfigTest/xmlConfigTest.xml")
                 .setSkipRoot(true)
                 .setKeyDelimiter(".")
                 .build();
@@ -188,7 +188,7 @@ public class XmlConfigurationTest extends AbstractBaseUtilTest {
     @Test
     public void testGetBooleanProperty() {
         XmlConfiguration xmlConfiguration = new XmlConfigBuilder()
-                .setInputFile("src/test/resources/XmlConfigurationUtilTest/xmlConfigTest.xml")
+                .setInputFile("src/test/resources/xmlConfigTest/xmlConfigTest.xml")
                 .setSkipRoot(true)
                 .setKeyDelimiter(".")
                 .build();
