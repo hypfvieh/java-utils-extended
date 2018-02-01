@@ -289,7 +289,7 @@ public class SimpleDatabaseConnector {
                 while (result.next()) {
                     Map<String, String> map = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
                     for (int i = 0; i < result.getMetaData().getColumnCount(); i++) {
-                        String columnName = result.getMetaData().getColumnName(i + 1);
+                        String columnName = result.getMetaData().getColumnLabel(i + 1);
                         map.put(columnName, result.getString(i + 1));
                     }
                     queryResult.add(map);
