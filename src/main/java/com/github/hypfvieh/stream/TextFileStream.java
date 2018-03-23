@@ -35,7 +35,7 @@ public final class TextFileStream {
 	 *
 	 * @param _input InputStream to read
 	 * @param _charset Charset to use
-	 * @return Stream<String>
+	 * @return Stream
 	 */
 	public static Stream<String> readFileToStream(InputStream _input, Charset _charset) {
 		return new BufferedReader(new InputStreamReader(_input, _charset.newDecoder())).lines();
