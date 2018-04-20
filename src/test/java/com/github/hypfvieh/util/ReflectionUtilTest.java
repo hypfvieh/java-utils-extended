@@ -82,15 +82,15 @@ public class ReflectionUtilTest extends AbstractBaseUtilTest {
     public void testGetAllDeclaredMethods() {
         Set<Method> allDeclaredFields = ReflectionUtil.getAllDeclared(TestClass3.class, Method.class);
         List<String> cll = allDeclaredFields.stream().map(f -> f.getName()).collect(Collectors.toList());
-        assertCollection(cll, "field1", "field2", "field3", "staticField1");
+        assertCollection(cll, "testMethod1", "testMethod2", "testMethod3");
 
         allDeclaredFields = ReflectionUtil.getAllDeclared(TestClass2.class, Method.class);
         cll = allDeclaredFields.stream().map(f -> f.getName()).collect(Collectors.toList());
-        assertCollection(cll, "field1", "field2", "field3");
+        assertCollection(cll, "testMethod1", "testMethod2");
 
         allDeclaredFields = ReflectionUtil.getAllDeclared(TestClass1.class, Method.class);
         cll = allDeclaredFields.stream().map(f -> f.getName()).collect(Collectors.toList());
-        assertCollection(cll, "field1", "field2");
+        assertCollection(cll, "testMethod1");
     }
 
     @Test
