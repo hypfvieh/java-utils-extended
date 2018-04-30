@@ -1,5 +1,6 @@
 package com.github.hypfvieh.db;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,7 +18,7 @@ public final class H2ConnParms extends DbConnParms {
     private final List<String> additionalUrlArgs = new ArrayList<>();
 
     public H2ConnParms(String _dbPath, String _user, String _password) {
-        super("jdbc:h2:" + _dbPath, _user, _password, "org.h2.Driver");
+        super("jdbc:h2:" + new File(_dbPath).getAbsolutePath() + ";AUTO_SERVER=TRUE;DB_CLOSE_DELAY=10", _user, _password, "org.h2.Driver");
         addAdditionalUrlArgs("AUTO_SERVER=TRUE");
         this.dbPath = _dbPath;
     }
