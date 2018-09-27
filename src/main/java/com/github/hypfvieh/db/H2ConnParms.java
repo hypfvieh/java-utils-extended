@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.github.hypfvieh.util.StringUtil;
+
 /**
  * Connection parameters to the H2 database.
  * Driver, most of database url, optionally user and password are preset in objects of this class.
@@ -17,10 +19,9 @@ public final class H2ConnParms extends DbConnParms {
     private final String dbPath;
     private final List<String> additionalUrlArgs = new ArrayList<>();
 
-    public H2ConnParms(String _dbPath, String _user, String _password) {
-        super("jdbc:h2:" + new File(_dbPath).getAbsolutePath() + ";AUTO_SERVER=TRUE;DB_CLOSE_DELAY=10", _user, _password, "org.h2.Driver");
-        addAdditionalUrlArgs("AUTO_SERVER=TRUE");
-        this.dbPath = _dbPath;
+    public H2ConnParms(String _dbFile, String _user, String _password) {
+        super("jdbc:h2:" + (StringUtil.endsWithAny(false, _dbFile, ".mv.db", ".h2.db") ? new File(_dbFile).getAbsolutePath().replaceAll("\\.(?:mv|h2)\\.db$", "") : _dbFile), _user, _password, "org.h2.Driver");
+        this.dbPath = _dbFile;
     }
 
     public H2ConnParms(String _dbPath) {
