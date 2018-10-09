@@ -13,6 +13,7 @@ import javafx.scene.text.Font;
  * @author hypfvieh
  *
  */
+@SuppressWarnings("restriction")
 public class FxFontUtil {
 
 	private FxFontUtil() {
