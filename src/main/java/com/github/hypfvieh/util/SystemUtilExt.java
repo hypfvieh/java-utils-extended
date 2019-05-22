@@ -3,8 +3,10 @@ package com.github.hypfvieh.util;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Utility-Class with various operating system related helper methods.
@@ -39,8 +41,9 @@ public final class SystemUtilExt {
         List<File> filesToDelete = new ArrayList<>();
         List<File> foldersToDelete = new ArrayList<>();
 
-        try {
-            Files.walk(path.toPath()).forEach(e -> {
+        try (Stream<Path> walk = Files.walk(path.toPath())) {
+            
+            walk.forEach(e -> {
                 if (e.toFile().isDirectory()) {
                     foldersToDelete.add(e.toFile());
                 } else {
