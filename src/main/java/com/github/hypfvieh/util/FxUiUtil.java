@@ -2,6 +2,7 @@ package com.github.hypfvieh.util;
 
 import java.io.IOException;
 import java.util.Optional;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -13,6 +14,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -60,13 +62,13 @@ public class FxUiUtil {
 
     /**
      * Opens a JavaFX window using an FXML file and sets resizable to true.
-     * @see showWindow(Class _parent, String _fXmlFile, boolean _wait, Modality _modal, boolean _resizeable, String _title)}
+     * @see #showWindow(Class, String, boolean, Modality, boolean, String)
      *
-     * @param _parent
-     * @param _fXmlFile
-     * @param _wait
-     * @param _modal
-     * @param _title
+     * @param _parent parent class (cannot be null)
+     * @param _fXmlFile fxml file to load
+     * @param _wait use showAndWait instead of show
+     * @param _modal set window modality
+     * @param _title window title
      */
     public static void showWindow(Class<?> _parent, String _fXmlFile, boolean _wait, Modality _modal,  String _title) {
         showWindow(_parent, _fXmlFile, _wait, _modal, true, _title);
@@ -74,25 +76,25 @@ public class FxUiUtil {
 
     /**
      * Opens a JavaFX window using an FXML file and sets resizable to true and modality to none.
-     * @see showWindow(Class _parent, String _fXmlFile, boolean _wait, Modality _modal, boolean _resizeable, String _title)}
+     * @see #showWindow(Class, String, boolean, Modality, boolean, String)
      *
-     * @param _parent
-     * @param _fXmlFile
-     * @param _wait
-     * @param _title
+     * @param _parent parent class (cannot be null)
+     * @param _fXmlFile fxml file to load
+     * @param _wait use showAndWait instead of show
+     * @param _title window title
      */
     public static void showWindow(Class<?> _parent, String _fXmlFile, boolean _wait, String _title) {
         showWindow(_parent, _fXmlFile, _wait, Modality.NONE, true, _title);
     }
     /**
      * Opens a JavaFX window using an FXML file and sets modality to none.
-     * @see showWindow(Class _parent, String _fXmlFile, boolean _wait, Modality _modal, boolean _resizeable, String _title)}
+     * @see #showWindow(Class, String, boolean, Modality, boolean, String)
      *
-     * @param _parent
-     * @param _fXmlFile
-     * @param _wait
-     * @param _resizeable
-     * @param _title
+     * @param _parent parent class (cannot be null)
+     * @param _fXmlFile fxml file to load
+     * @param _wait use showAndWait instead of show
+     * @param _resizeable true to allow window resizing, false otherwise
+     * @param _title window title
      */
     public static void showWindow(Class<?> _parent, String _fXmlFile, boolean _wait, boolean _resizeable,  String _title) {
         showWindow(_parent, _fXmlFile, _wait, Modality.NONE, _resizeable, _title);
@@ -113,8 +115,9 @@ public class FxUiUtil {
 
     /**
      * Converts JavaFX color to HTML Style Colorcode.
-     * @param _color
-     * @return
+     * @param _color javaFX color object
+     *
+     * @return HTML color code
      */
     public static String fxColorToHtmlRgbCode(Color _color) {
         return String.format( "#%02X%02X%02X",
@@ -125,11 +128,12 @@ public class FxUiUtil {
 
     /**
      * Shows an confirmation dialog with custom buttons.
-     * @param _msg
-     * @param _title
-     * @param _subTitle
-     * @param _btnYesCaption
-     * @param _btnNoCaption
+     * @param _msg message to show
+     * @param _title message box title
+     * @param _subTitle subtitle to use
+     * @param _btnYesCaption caption of 'Yes' button
+     * @param _btnNoCaption caption of 'No' button
+     *
      * @return true if yes was clicked, false otherwise
      */
     public static boolean showConfirmYesNo(String _msg, String _title, String _subTitle, String _btnYesCaption, String _btnNoCaption) {
@@ -151,10 +155,10 @@ public class FxUiUtil {
 
     /**
      * Shows any kind of dialog (useful for warning/information/error dialogs).
-     * @param _type
-     * @param _title
-     * @param _subTitle
-     * @param _msg
+     * @param _type dialog type
+     * @param _title title of dialog box
+     * @param _subTitle subtitle of dialog
+     * @param _msg message of dialog
      */
     public static void showDialog(AlertType _type, String _title, String _subTitle, String _msg) {
             Alert alert = new Alert(_type);

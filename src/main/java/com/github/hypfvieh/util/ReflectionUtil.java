@@ -77,8 +77,9 @@ public final class ReflectionUtil {
      * <b>NOTE:</b> Accessibility of {@link Field}s returned in the {@link Set} have not been changed
      * (setAccessable(true) is NOT called explicitly)!
      *
-     * @param _class
-     * @param _fieldsToIgnore
+     * @param _class class to analyze
+     * @param _fieldsToIgnore fields to skip
+     *
      * @return null if _class was null, Set otherwise
      */
     public static Set<Field> getAllDeclaredFields(Class<?> _class, String... _fieldsToIgnore) {
@@ -97,9 +98,10 @@ public final class ReflectionUtil {
     /**
      * Extract all {@link Field}s which are static and do not match any of the given ignore names.
      *
-     * @param _class
-     * @param _fieldsToIgnore
-     * @return
+     * @param _class class to analyze
+     * @param _fieldsToIgnore fields to skip
+     *
+     * @return null if _class was null, Set otherwise
      */
     public static Set<Field> getAllDeclaredStaticFields(Class<?> _class, String... _fieldsToIgnore) {
         return getAllDeclaredStatic(ReflectionType.FIELD, _class, _fieldsToIgnore);
@@ -108,9 +110,10 @@ public final class ReflectionUtil {
     /**
      * Extract all {@link Field}s which are <b>not</b> static and do not match any of the given ignore names.
      *
-     * @param _class
-     * @param _fieldsToIgnore
-     * @return
+     * @param _class class to analyze
+     * @param _fieldsToIgnore fields to skip
+     *
+     * @return null if _class was null, Set otherwise
      */
     public static Set<Field> getAllDeclaredNonStaticFields(Class<?> _class, String... _fieldsToIgnore) {
         return getAllDeclaredNonStatic(ReflectionType.FIELD, _class, _fieldsToIgnore);
@@ -123,8 +126,9 @@ public final class ReflectionUtil {
      * <b>NOTE:</b> Accessibility of {@link Field}s returned in the {@link Set} have not been changed
      * (setAccessable(true) is NOT called explicitly)!
      *
-     * @param _class
-     * @param _annotations
+     * @param _class class to analyze
+     * @param _annotations annotations to check for
+     *
      * @return null if _class was null, Set otherwise
      */
     @SafeVarargs
@@ -139,8 +143,9 @@ public final class ReflectionUtil {
      * <b>NOTE:</b> Accessibility of {@link Field}s returned in the {@link Set} have not been changed
      * (setAccessable(true) is NOT called explicitly)!
      *
-     * @param _class
-     * @param _annotations
+     * @param _class class to analyze
+     * @param _annotations annotations to check for
+     *
      * @return null if _class was null, Set otherwise
      */
     @SafeVarargs
@@ -157,8 +162,9 @@ public final class ReflectionUtil {
      *
      * @since v1.0.2 - 2018-04-20
      *
-     * @param _class
-     * @param _methodsToIgnore
+     * @param _class class to analyze
+     * @param _methodsToIgnore methods to skip
+     *
      * @return null if _class was null, Set otherwise
      */
     public static Set<Method> getAllDeclaredMethods(Class<?> _class, String... _methodsToIgnore) {
@@ -179,9 +185,10 @@ public final class ReflectionUtil {
      *
      * @since v1.0.2 - 2018-04-20
      *
-     * @param _class
-     * @param _methodNamesToIgnore
-     * @return
+     * @param _class class to analyze
+     * @param _methodNamesToIgnore methods to skip
+     *
+     * @return null if _class was null, Set otherwise
      */
     public static Set<Method> getAllDeclaredStaticMethods(Class<?> _class, String... _methodNamesToIgnore) {
         return getAllDeclaredStatic(ReflectionType.METHOD, _class, _methodNamesToIgnore);
@@ -192,9 +199,10 @@ public final class ReflectionUtil {
      *
      * @since v1.0.2 - 2018-04-20
      *
-     * @param _class
-     * @param _methodNamesToIgnore
-     * @return
+     * @param _class class to analyze
+     * @param _methodNamesToIgnore methods to skip
+     *
+     * @return null if _class was null, Set otherwise
      */
     public static Set<Method> getAllDeclaredNonStaticMethods(Class<?> _class, String... _methodNamesToIgnore) {
         return getAllDeclaredNonStatic(ReflectionType.METHOD, _class, _methodNamesToIgnore);
@@ -210,8 +218,9 @@ public final class ReflectionUtil {
      *
      * @since v1.0.2 - 2018-04-20
      *
-     * @param _class
-     * @param _annotations
+     * @param _class class to analyze
+     * @param _annotations annotations to check for
+     *
      * @return null if _class was null, Set otherwise
      */
     @SafeVarargs
@@ -228,8 +237,9 @@ public final class ReflectionUtil {
      *
      * @since v1.0.2 - 2018-04-20
      *
-     * @param _class
-     * @param _annotations
+     * @param _class class to analyze
+     * @param _annotations annotations to check for
+     *
      * @return null if _class was null, Set otherwise
      */
     @SafeVarargs
@@ -286,13 +296,13 @@ public final class ReflectionUtil {
      * Result will depend on lambda. All positive lambda results (test returns true), will be added to the result Set.
      *
      * @since v1.0.2 - 2018-04-20
-     * @param _class
-     * @param _withAnnotation
-     * @param _annotations
+     * @param _class class to analyze
+     * @param _annotationCheckLambda lambda to use to check every annotation
+     * @param _annotations annotations to check for
      * @return null if class was null, Set otherwise
      */
     @SafeVarargs
-    private static <T> Set<T> getAllDeclaredWithAnnotationAction(ReflectionType _type, Class<?> _class, BiPredicate<T, Class<? extends Annotation>> _withAnnotation, Class<? extends Annotation>... _annotations) {
+    private static <T> Set<T> getAllDeclaredWithAnnotationAction(ReflectionType _type, Class<?> _class, BiPredicate<T, Class<? extends Annotation>> _annotationCheckLambda, Class<? extends Annotation>... _annotations) {
         if (_class == null) {
             return null;
         }
@@ -306,7 +316,7 @@ public final class ReflectionUtil {
         Set<T> result = new LinkedHashSet<>();
         for (T field : allDeclaredFields) {
             for (Class<? extends Annotation> annot : _annotations) {
-                if (_withAnnotation.test(field, annot)) {
+                if (_annotationCheckLambda.test(field, annot)) {
                     result.add(field);
                     break;
                 }

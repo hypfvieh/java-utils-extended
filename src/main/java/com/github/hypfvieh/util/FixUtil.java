@@ -11,16 +11,23 @@ import org.apache.commons.lang3.StringUtils;
 
 public final class FixUtil {
 
-    private static List<Integer> stdHeader = TypeUtil.createList(8, 9, 35, 49, 56, 115, 128, 90, 91, 34, 50, 142, 57, 143, 116, 144, 129, 145, 43, 97, 52, 122, 212, 213, 347, 369);
-    private static List<Integer> stdHeaderHops = TypeUtil.createList(627, 628, 629, 630); // Routing fields
-    private static List<Integer> stdTrailer = TypeUtil.createList(93, 98, 10);
+    //CHECKSTYLE:OFF
+    public static final String FIX_DELIM     = "\u0001";
+
+    static final List<Integer> stdHeader     = Arrays.asList(
+            8, 9, 35, 49, 56, 115, 128, 90, 91, 34, 50, 142,
+            57, 143, 116, 144, 129, 145, 43, 97, 52, 122, 212, 213, 347, 369);
+    static final List<Integer> stdHeaderHops = Arrays.asList(627, 628, 629, 630); // Routing fields
+    static final List<Integer> stdTrailer    = Arrays.asList(93, 98, 10);
+    //CHECKSTYLE:ON
+
     private FixUtil() {
 
     }
 
     /**
      * Extract delimiter of FixMessageString.
-     * @param _line
+     * @param _line line to read
      * @return delimiter or null
      */
     public static String getDelimiterFromFixMsgStr(String _line) {
@@ -67,8 +74,8 @@ public final class FixUtil {
 
     /**
      * Get a value from a FixMessage String.
-     * @param _msg
-     * @param _tag
+     * @param _msg fix message as string
+     * @param _tag tag to read
      *
      * @return value or null if tag could not be found
      */
@@ -82,15 +89,14 @@ public final class FixUtil {
      * If _tag is not found, it is appended.
      * This method also ensures that the header and trailer tags are in correct order.
      *
-     * @param _msg
-     * @param _tag
-     * @param _value
-     * @return
+     * @param _msg fix message as string
+     * @param _tag tag to write
+     * @param _value value for tag
+     * @return string with added/changed tag value
      */
     public static String setFixTagOnMsgStr(String _msg, int _tag, String _value) {
         char delimiter = getDelimiterFromFixMsgStr(_msg).charAt(0);
         return setFixTagOnMsgStr(_msg, _tag, _value, delimiter);
-
     }
 
     /**
@@ -98,11 +104,11 @@ public final class FixUtil {
      * If _tag is not found, it is appended.
      * This method also ensures that the header and trailer tags are in correct order.
      *
-     * @param _msg
-     * @param _tag
-     * @param _value
-     * @param _delim
-     * @return
+     * @param _msg fix message as string
+     * @param _tag tag to write
+     * @param _value value to set
+     * @param _delim delimiter to use
+     * @return string with added/changed tag value
      */
     public static String setFixTagOnMsgStr(String _msg, int _tag, String _value, char _delim) {
         List<String> msgKeyValues = new ArrayList<>(Arrays.asList(StringUtils.split(_msg, _delim)));
@@ -170,9 +176,9 @@ public final class FixUtil {
 
     /**
      * Internal helper method to easily add or update a list of tagvalues.
-     * @param _tag
-     * @param _val
-     * @param _list
+     * @param _tag tag to update
+     * @param _val value to set
+     * @param _list list of tag values to iterate
      */
     private static void addOrUpdateTag(int _tag, String _val, List<TagValue> _list) {
         if (_list == null || StringUtils.isBlank(_val)) {
@@ -190,8 +196,8 @@ public final class FixUtil {
 
    /**
     * Calculates the body length of the given message.
-    * @param _msg
-    * @return
+    * @param _msg fix message as string
+    * @return checksum
     */
     public static int calculateFixBodyLength(String _msg) {
         String delimiter = getDelimiterFromFixMsgStr(_msg);
@@ -201,8 +207,9 @@ public final class FixUtil {
 
     /**
      * Calculates the body length of the given message.
-     * @param _msg
-     * @return
+     * @param _msg fix message as string
+     * @param _delimiter delimiter to use
+     * @return body length
      */
      public static int calculateFixBodyLength(String _msg, char _delimiter) {
          String modMsg = setFixTagOnMsgStr(_msg, 9, 0 + ""); // reset body length to 0, this also ensures that we have a body length tag
@@ -237,8 +244,8 @@ public final class FixUtil {
 
      /**
      * Calculates the bodylength of a messages and writes it to tag 9.
-     * @param _msg
-     * @return
+     * @param _msg fix message as string
+     * @return  message with updated body length
      */
     public static String updateFixBodyLength(String _msg) {
         int msgLen = calculateFixBodyLength(_msg);
@@ -247,23 +254,23 @@ public final class FixUtil {
 
     /**
      * Calculates the checksum of the message.
-     * @param _msg
-     * @param _delim
-     * @return
+     * @param _msg fix message as string
+     * @param _delim delimiter to use
+     * @return checksum
      */
     public static String calculateFixCheckSum(String _msg, char _delim) {
         if (StringUtils.isEmpty(_msg)) {
             return null;
         }
         int chkSum = 0; String msg = _msg.replaceAll(10 + "=" + ".+$", "").replace(_delim, "\u0001".charAt(0));
-        for (int i = 0; i < msg.length(); chkSum += (int) msg.charAt(i++)) /*CHECKSTYLE:OFF*/ { } /*CHECKSTYLE:ON*/
+        for (int i = 0; i < msg.length(); chkSum += msg.charAt(i++)) /*CHECKSTYLE:OFF*/ { } /*CHECKSTYLE:ON*/
         return String.format("%03d", chkSum % 256);
     }
 
     /**
      * Sets the correct checksum in tag 10.
-     * @param _msg
-     * @return
+     * @param _msg fix message as string
+     * @return fix message with updated checksum
      */
     public static String updateFixCheckSum(String _msg) {
         String fixMsg = _msg.replace(getDelimiterFromFixMsgStr(_msg), "\u0001");
@@ -274,8 +281,8 @@ public final class FixUtil {
 
     /**
      * Checks if given String looks like a FIX message.
-     * @param _msg
-     * @return
+     * @param _msg fix message as string
+     * @return true if format matches a FIX message, false otherwise
      */
     public static boolean looksLikeFixMsg(String _msg) {
 

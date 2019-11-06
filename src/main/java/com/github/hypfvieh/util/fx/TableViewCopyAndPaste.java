@@ -72,6 +72,7 @@ public class TableViewCopyAndPaste<S> {
     /**
      * Create a new utility instance.
      * @param _tblViewGenericClass class used in the {@link TableView}
+     * @param <S> type of table view content
      * @return this
      */
     public static <S> TableViewCopyAndPaste<S> create(Class<S> _tblViewGenericClass) {

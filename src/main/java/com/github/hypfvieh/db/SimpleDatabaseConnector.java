@@ -86,8 +86,8 @@ public class SimpleDatabaseConnector {
      * Throws SQLException on any connection error.
      *
      * @return true if connected, false otherwise
-     * @throws InvalidClassException
-     * @throws ClassNotFoundException
+     * @throws InvalidClassException if class is not a java.sql.Driver derivative
+     * @throws ClassNotFoundException if class could not be found
      */
     public final synchronized boolean openDatabase() throws InvalidClassException, ClassNotFoundException {
         if (dbOpen) {
@@ -153,7 +153,7 @@ public class SimpleDatabaseConnector {
 
     /**
      * Closes the database connection if it was previously connected.
-     * @throws SQLException
+     * @throws SQLException if closing fails
      */
     public synchronized void closeDatabase() throws SQLException {
         if (dbConnection != null) {
@@ -241,8 +241,8 @@ public class SimpleDatabaseConnector {
     /**
      * Executes an sql query.
      *
-     * @param _sql
-     * @param _args
+     * @param _sql query to execute
+     * @param _args arguments to fill-in placeholders in query, can be omitted if none needed
      * @return true if SQL-query returns an update-count, false on error or if result is resultset instead of update count.
      */
     public synchronized boolean executeQuery(String _sql, Object... _args) {
@@ -307,7 +307,7 @@ public class SimpleDatabaseConnector {
 
     /**
      * Creates a prepared statement which can be used for batch statements.
-     * @param _sql
+     * @param _sql sql to create prepared statement for
      * @return new prepared statement or null on error
      */
     public synchronized PreparedStatement createPreparedStatement(String _sql) {
@@ -333,8 +333,8 @@ public class SimpleDatabaseConnector {
 
     /**
      * Execute a previously created prepared statement (update or delete).
-     * @param _ps
-     * @return
+     * @param _ps prepared statement to execute
+     * @return true if execution successfully, false otherwise
      */
     public synchronized boolean executeQuery(PreparedStatement _ps) {
         if (dbConnection == null) {
@@ -360,6 +360,9 @@ public class SimpleDatabaseConnector {
 
     /**
      * Enable/Disable autocommit on database connection.
+     * @param _onOff enable/disable autocommit
+     *
+     * @throws SQLException if autocommit option cannot be changed
      */
     public void setAutoCommit(boolean _onOff) throws SQLException {
         if (dbConnection != null) {
@@ -367,6 +370,11 @@ public class SimpleDatabaseConnector {
         }
     }
 
+    /**
+     * Returns status of autocommit option.
+     * @return true if autocommit enabled, false otherwise
+     * @throws SQLException if autocommit option status could not be determined
+     */
     public boolean isAutoCommit() throws SQLException {
         if (dbConnection != null) {
             return dbConnection.getAutoCommit();

@@ -15,7 +15,7 @@ public interface IImgHash {
      * Calculate the hash of given image.
      * @param _image image to hash
      * @return hash as string
-     * @throws IOException
+     * @throws IOException when file processing fails
      */
     String computeHash(File _image) throws IOException;
 }

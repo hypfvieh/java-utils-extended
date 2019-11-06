@@ -25,9 +25,9 @@ import com.github.hypfvieh.util.SystemUtil;
  *<br>
  * Supported placeholders are<br>
  * <pre>
- * %{n} => replaced by current number of file
- * %{ext} => extension of the file without leading dot
- * %{date:PATTERN} => use date/time as pattern, where PATTERN is a valid {@link DateTimeFormatter} pattern
+ * %{n} &rArr; replaced by current number of file
+ * %{ext} &rArr; extension of the file without leading dot
+ * %{date:PATTERN} &rArr; use date/time as pattern, where PATTERN is a valid {@link DateTimeFormatter} pattern
  * </pre>
  *
  * Every pattern has to specify exactly one %{n}-placeholder which will be replaced by the current<br>

@@ -25,7 +25,7 @@ public final class SystemUtilExt {
      *
      * @param _fileOrDirectoryPath path to delete
      * @param _stopOnError if true throw an exception and exit on any error
-     * @throws IOException
+     * @throws IOException if error occurs during deletion
      */
     public static void deleteRecursively(String _fileOrDirectoryPath, boolean _stopOnError) throws IOException {
 
@@ -42,7 +42,7 @@ public final class SystemUtilExt {
         List<File> foldersToDelete = new ArrayList<>();
 
         try (Stream<Path> walk = Files.walk(path.toPath())) {
-            
+
             walk.forEach(e -> {
                 if (e.toFile().isDirectory()) {
                     foldersToDelete.add(e.toFile());
@@ -81,7 +81,7 @@ public final class SystemUtilExt {
 
     /**
      * Delete all files and directories in the given path recursively and without throwing any exception.
-     * @param _fileOrDirectoryPath
+     * @param _fileOrDirectoryPath file or directory to delete
      */
     public static void deleteRecursivelyQuiet(String _fileOrDirectoryPath) {
         try {

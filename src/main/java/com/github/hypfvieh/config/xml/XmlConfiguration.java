@@ -62,7 +62,7 @@ public class XmlConfiguration {
 
     /**
      * Get the delimiting key (default is '/').
-     * @return
+     * @return current delimiting key
      */
     public String getKeyDelimiter() {
         return keyDelimiter;
@@ -71,7 +71,7 @@ public class XmlConfiguration {
     /**
      * Set the delimiting key.<br>
      * If null is given, default ('/') will be used.
-     * @param _keyDelimiter
+     * @param _keyDelimiter delimiter to use
      */
     public void setKeyDelimiter(String _keyDelimiter) {
         if (_keyDelimiter == null) {
@@ -83,7 +83,7 @@ public class XmlConfiguration {
 
     /**
      * Get the amount of nodes in config.
-     * @return
+     * @return nodes in document
      */
     public int keyCount() {
         return countNodes(getXmlDocument());
@@ -134,9 +134,9 @@ public class XmlConfiguration {
      * Get a configuration value as int.
      * If _key not found, or not an integer, default is returned.
      *
-     * @param _key
-     * @param _default
-     * @return
+     * @param _key key to read
+     * @param _default default to return if key not found/invalid
+     * @return value as int or default
      */
     public int getInt(String _key, int _default) {
         String valAsStr = getString(_key, String.valueOf(_default));
@@ -151,9 +151,9 @@ public class XmlConfiguration {
      * Retrieve a configuration value as double.
      * If _key could not be found, or value was not of type 'double', default is returned.
      *
-     * @param _key
-     * @param _default
-     * @return
+     * @param _key key to read
+     * @param _default default to return if key not found/invalid
+     * @return value as double or default
      */
     public double getDouble(String _key, double _default) {
         String valAsStr = getString(_key, _default + "");
@@ -183,9 +183,9 @@ public class XmlConfiguration {
      * </ul>
      * All other values are considered to be false.
      * <br>
-     * @param _key
-     * @param _default
-     * @return
+     * @param _key key to read
+     * @param _default default to return if key not found/invalid
+     * @return boolean or default value
      */
     public boolean getBoolean(String _key, boolean _default) {
         String valAsStr = getString(_key, String.valueOf(_default));
@@ -217,7 +217,7 @@ public class XmlConfiguration {
 
     /**
      * Get all values behind the given key as list of string.
-     * @param _key
+     * @param _key key to read
      * @return list maybe empty, never null
      */
     private List<String> getList(String _key) {
@@ -253,7 +253,7 @@ public class XmlConfiguration {
     /**
      * Returns the results of key as ArrayList.
      *
-     * @param _key
+     * @param _key key to read
      * @return never null, maybe empty list
      */
     public List<String> getStringList(String _key) {
@@ -279,9 +279,9 @@ public class XmlConfiguration {
      * Returns a result as Set of the given Set-Subclass.
      * If given Set-Class is null or could not be instantiated, TreeSet is used.
      *
-     * @param _key
-     * @param _setClass
-     * @return
+     * @param _key key to read
+     * @param _setClass Set class to use
+     * @return set of string maybe empty
      */
     @SuppressWarnings({"unchecked", "rawtypes"})
     public Set<String> getStringSet(String _key, Class<? extends Set> _setClass) {
@@ -298,7 +298,7 @@ public class XmlConfiguration {
 
             return newInstance;
         } catch (InstantiationException | IllegalAccessException _ex) {
-            return new TreeSet<String>(list);
+            return new TreeSet<>(list);
         }
     }
 
@@ -317,7 +317,7 @@ public class XmlConfiguration {
     /**
      * Save config file.
      * Will replace input file!
-     * @throws IOException
+     * @throws IOException if file writing fails
      */
     public void save() throws IOException {
         List<IOException> exception = new ArrayList<>();
@@ -341,8 +341,8 @@ public class XmlConfiguration {
      * Save config using {@link BiConsumer}.
      * This allows transforming/formatting of output before it is saved to the configured output stream.
      *
-     * @param _outputGenerator
-     * @throws IOException
+     * @param _outputGenerator lambda to modify output with before writing
+     * @throws IOException if writing fails
      */
     public void save(BiConsumer<Document, OutputStream> _outputGenerator) throws IOException {
         OutputStream output = null;

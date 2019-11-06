@@ -37,7 +37,7 @@ public class XmlConfigBuilder {
     /**
      * Set {@link InputStream} used to read configuration file.
      *
-     * @param _inputStream
+     * @param _inputStream input stream to read from
      * @return this for chaining
      */
     public XmlConfigBuilder setInputStream(InputStream _inputStream) {
@@ -50,7 +50,7 @@ public class XmlConfigBuilder {
 
     /**
      * Set {@link OutputStream} used to save configuration file.
-     * @param _outputStream
+     * @param _outputStream output stream to write to
      * @return this for chaining
      */
     public XmlConfigBuilder setOutputStream(OutputStream _outputStream) {
@@ -65,7 +65,7 @@ public class XmlConfigBuilder {
      * Set output file used for saving.
      * Note: This cannot be set if outputStream is already set.
      *
-     * @param _outputFile
+     * @param _outputFile output file to write to
      * @return this for chaining
      */
     public XmlConfigBuilder setOutputFile(File _outputFile) {
@@ -81,7 +81,7 @@ public class XmlConfigBuilder {
      * Set output file used for saving.
      * Note: This cannot be set if outputStream is already set.
      *
-     * @param _outputFile
+     * @param _outputFile output file to write to
      * @return this for chaining
      */
     public XmlConfigBuilder setOutputFile(String _outputFile) {
@@ -92,7 +92,8 @@ public class XmlConfigBuilder {
      * Set input file used for reading configuration.
      * Note: This cannot be set if inputStream is already set.
      *
-     * @param _inputFile
+     * @param _inputFile input file to read from
+     * @param _order search order to use
      * @return this for chaining
      */
     public XmlConfigBuilder setInputFile(File _inputFile, SearchOrder... _order) {
@@ -114,7 +115,8 @@ public class XmlConfigBuilder {
      * Set input file used for reading configuration.
      * Note: This cannot be set if inputStream is already set.
      *
-     * @param _inputFile
+     * @param _inputFile input file to read from
+     * @param _order search order to use
      * @return this for chaining
      */
     public XmlConfigBuilder setInputFile(String _inputFile, SearchOrder... _order) {
@@ -126,7 +128,7 @@ public class XmlConfigBuilder {
      * By default a 'quiet' handler is used (suppressing all errors).<br>
      * Use null here to disable validation.
      *
-     * @param _xmlErrorHandler
+     * @param _xmlErrorHandler error handler to use
      * @return this for chaining
      */
     public XmlConfigBuilder setXmlErrorHandler(ErrorHandler _xmlErrorHandler) {
@@ -139,7 +141,7 @@ public class XmlConfigBuilder {
      * By default "/" is used, which means all pathes have to be expressed like:<br>
      * foo/bar/baz
      *
-     * @param _delimiterKey
+     * @param _delimiterKey delimiting string
      * @return this for chaining
      */
     public XmlConfigBuilder setKeyDelimiter(String _delimiterKey) {
@@ -156,7 +158,7 @@ public class XmlConfigBuilder {
      * <br><br>
      * Default is false.
      *
-     * @param _skipRoot
+     * @param _skipRoot true to skip root, false otherwise
      * @return this for chaining
      */
     public XmlConfigBuilder setSkipRoot(boolean _skipRoot) {
@@ -173,7 +175,7 @@ public class XmlConfigBuilder {
      * <br><br>
      * Default is false
      *
-     * @param _allowOverride
+     * @param _allowOverride true to enable override, false otherwise
      * @return this for chaining
      */
     public XmlConfigBuilder setAllowKeyOverrideFromEnvironment(boolean _allowOverride) {
