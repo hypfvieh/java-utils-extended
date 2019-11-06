@@ -53,6 +53,8 @@ public class RollingFileUtilTest {
         RollingFileUtil.doFileRolling(createTempFile(), "rollover5-%{n}.%{ext}", 5);
         RollingFileUtil.doFileRolling(createTempFile(), "rollover5-%{n}.%{ext}", 5);
         RollingFileUtil.doFileRolling(createTempFile(), "rollover5-%{n}.%{ext}", 5);
+        RollingFileUtil.doFileRolling(createTempFile(), "rollover5-%{n}.%{ext}", 5);
+        RollingFileUtil.doFileRolling(createTempFile(), "rollover5-%{n}.%{ext}", 5);
 
 
         List<File> toDeleteLater = new ArrayList<>();
