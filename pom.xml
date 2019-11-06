@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.hypfvieh</groupId>
 	<artifactId>java-utils-extended</artifactId>
-	<version>1.0.6-SNAPSHOT</version>
+	<version>1.0.6</version>
 	<packaging>jar</packaging>
 	
 	<properties>
@@ -49,13 +49,13 @@
 		<dependency>
 			<groupId>com.github.hypfvieh</groupId>
 			<artifactId>java-utils</artifactId>
-			<version>1.0.6-SNAPSHOT</version>
+			<version>1.0.6</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.github.hypfvieh</groupId>
 			<artifactId>java-utils</artifactId>
-			<version>1.0.6-SNAPSHOT</version>
+			<version>1.0.6</version>
 			<scope>test</scope>
 			<type>test-jar</type>
 		</dependency>
