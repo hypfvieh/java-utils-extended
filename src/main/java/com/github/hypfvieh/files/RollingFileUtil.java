@@ -92,7 +92,7 @@ public class RollingFileUtil {
      */
     private File checkAndMove(File _fileToRollOver, String _filenamePattern, int _maxFiles) throws IOException {
         String baseFileName = expandFilePattern(_filenamePattern, _fileToRollOver.getName());
-        int zeropad = _maxFiles / 10;
+        int zeropad = (_maxFiles / 10) + 1;
 
         Map<File, File> moveMap = new LinkedHashMap<>();
 
