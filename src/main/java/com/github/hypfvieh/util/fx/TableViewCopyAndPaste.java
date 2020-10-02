@@ -46,11 +46,14 @@ import javafx.scene.input.KeyEvent;
  * <br><br>
  * The copy/paste format is tab-separated (\t) columns, lines are expected to end with line-break (\n).
  *
+ * @deprecated will be removed in future version. Use javafx-utils artifact for JavaFx related tools.
+ *
  * @param <S> type of the given {@link TableView}
  *
  * @author hypfvieh
  * @version 1.0.6 - 2019-10-01
  **/
+@Deprecated
 public class TableViewCopyAndPaste<S> {
 
     private final Map<Integer, Function<Object, String>> copyColumnFormatters;

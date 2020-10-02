@@ -10,10 +10,13 @@ import com.github.hypfvieh.util.fx.fonts.IWebFontCode;
 /**
  * Utility to work with different (Web)fonts.
  *
+ * @deprecated will be removed in future relase. Use javafx-utils for JavaFx related functions.
+ *
  * @author hypfvieh
  *
  */
 @SuppressWarnings("restriction")
+@Deprecated
 public class FxFontUtil {
 
 	private FxFontUtil() {
